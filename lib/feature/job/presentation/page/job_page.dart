@@ -3,6 +3,7 @@ import '../../data/model/job_model.dart';
 import '../../domain/entity/job.dart';
 import '../../domain/entity/job_essential.dart';
 import '../widget/job_card.dart';
+import '../../../../core/theme/app_pallet.dart';
 
 class JobsPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (_) => const JobsPage());
@@ -43,40 +44,79 @@ class _JobsPageState extends State<JobsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.work, size: 28),
-            SizedBox(width: 6),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppPallete.primaryColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(Icons.work_rounded, size: 28, color: AppPallete.primaryColor),
+            ),
+            const SizedBox(width: 12),
             Text(
-              'Jobs',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+              'Job Opportunities',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: AppPallete.whiteColor,
                 fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
+        backgroundColor: AppPallete.transparentColor,
+        elevation: 0,
       ),
       body: _loading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppPallete.primaryColor,
+              ),
+            )
           : jobs.isEmpty
-          ? const Center(child: Text("No jobs available right now."))
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.work_off_rounded,
+                    size: 64,
+                    color: AppPallete.textSecondary,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "No jobs available right now.",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: AppPallete.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Check back later for new opportunities!",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppPallete.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            )
           : ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: jobs.length,
-        itemBuilder: (context, index) {
-          final jobItem = JobEssential(
-            title: jobs[index].title,
-            company: jobs[index].company,
-            location: jobs[index].location,
-            employmentType: jobs[index].employmentType,
-            skills: jobs[index].skills ?? [],
-            applyUrl: jobs[index].applyUrl,
-            postedAt: jobs[index].postedAt,
-          );
-          return JobCard(job: jobItem);
-        },
-      ),
+              padding: const EdgeInsets.all(16),
+              itemCount: jobs.length,
+              itemBuilder: (context, index) {
+                final jobItem = JobEssential(
+                  title: jobs[index].title,
+                  company: jobs[index].company,
+                  location: jobs[index].location,
+                  employmentType: jobs[index].employmentType,
+                  skills: jobs[index].skills ?? [],
+                  applyUrl: jobs[index].applyUrl,
+                  postedAt: jobs[index].postedAt,
+                );
+                return JobCard(job: jobItem);
+              },
+            ),
     );
   }
 }

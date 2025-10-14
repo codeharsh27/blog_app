@@ -12,15 +12,16 @@ import 'feature/blog/presentation/bloc/blog_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependency();
-  runApp(MultiBlocProvider(
+  runApp(
+    MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => serviceLocator<AppUserCubit>(),
-        ),
-        BlocProvider(create: (_) => serviceLocator<AuthBloc>(),
-        ),
-        BlocProvider(create: (_) => serviceLocator<BlogBloc>(),)
+        BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
+        BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (_) => serviceLocator<BlogBloc>()),
       ],
-      child: BlogApp()));
+      child: BlogApp(),
+    ),
+  );
 }
 
 class BlogApp extends StatefulWidget {
@@ -47,12 +48,12 @@ class _BlogAppState extends State<BlogApp> {
           return state is AppUserLoggedIn;
         },
         builder: (context, isLoggedIn) {
-          if(isLoggedIn){
+          if (isLoggedIn) {
             return const MainPage();
           }
           return LoginPage();
         },
-      ) ,
+      ),
     );
   }
 }

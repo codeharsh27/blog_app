@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
 
   @override
-  void dispose(){
+  void dispose() {
     emailcontroller.dispose();
     passwordcontroller.dispose();
     super.dispose();
@@ -36,78 +36,71 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(15.0),
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
-            if(state is AuthFailure){
+            if (state is AuthFailure) {
               showSnackBar(context, state.message);
             }
           },
-        builder: (context, state) {
-          if (state is AuthLoading) {
-            const Loader();
-          }
-          return Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Sign in.",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              const Loader();
+            }
+            return Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Sign in.",
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const SizedBox(height: 40),
-                AuthField(hintText: "Email", controller: emailcontroller,),
-                const SizedBox(height: 15),
-                AuthField(hintText: "Password",
-                  controller: passwordcontroller,
-                  isObscureText: true,),
-                const SizedBox(height: 20),
-                AuthGradientButton(buttonName: "Sign in",
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      context.read<AuthBloc>().add(
-                          AuthSignin(email: emailcontroller.text.trim(),
+                  const SizedBox(height: 40),
+                  AuthField(hintText: "Email", controller: emailcontroller),
+                  const SizedBox(height: 15),
+                  AuthField(
+                    hintText: "Password",
+                    controller: passwordcontroller,
+                    isObscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  AuthGradientButton(
+                    buttonName: "Sign in",
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                          AuthSignin(
+                            email: emailcontroller.text.trim(),
                             password: passwordcontroller.text.trim(),
-                          )
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()),
                       );
-                    }
-                  },
-                ),
-                const SizedBox(height: 15,),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => SignUpPage()));
-                  },
-                  child: RichText(
-                    text: TextSpan(
+                    },
+                    child: RichText(
+                      text: TextSpan(
                         text: "Don't have an Account? ",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleMedium,
+                        style: Theme.of(context).textTheme.titleMedium,
                         children: [
                           TextSpan(
-                              text: "Sign up",
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                  color: AppPallete.gradient2
-                              )
-                          )
-                        ]
-
+                            text: "Sign up",
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(color: AppPallete.gradient2),
+                          ),
+                        ],
+                      ),
                     ),
-
                   ),
-                )
-              ],
-            ),
-          );
-        }
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

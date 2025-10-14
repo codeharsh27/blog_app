@@ -47,20 +47,36 @@ class _BlogPageState extends State<BlogPage> {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.terminal_rounded, size: 28,),
-            const Text('Dev', style: TextStyle(
+            Icon(Icons.terminal_rounded, size: 28, color: AppPallete.primaryColor),
+            const SizedBox(width: 8),
+            Text('Dev', style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: AppPallete.whiteColor,
               fontSize: 28
             ),),
-            const Text('App',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)
+            Text('App',style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppPallete.whiteColor
+            ),)
           ],
         ),
         backgroundColor: AppPallete.transparentColor,
+        elevation: 0,
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, AddNewBlogPage.route());
-          }, icon: Icon(Icons.file_upload_outlined, size: 25,)),
+          Container(
+            decoration: BoxDecoration(
+              color: AppPallete.surfaceColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: IconButton(
+              onPressed: (){
+                Navigator.push(context, AddNewBlogPage.route());
+              },
+              icon: Icon(Icons.file_upload_outlined, size: 25, color: AppPallete.primaryColor),
+            ),
+          ),
+          const SizedBox(width: 8),
         ],
       ),
       body: SingleChildScrollView(
@@ -79,30 +95,70 @@ class _BlogPageState extends State<BlogPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(18, 10, 10, 5),
-                    child: Text('Latest Tech Blogs', style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),),
+                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: AppPallete.primaryColor,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Latest Tech Blogs',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: AppPallete.whiteColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
-                      height: 305,
+                      height: 310,
                       child: ListView.builder(
-                          scrollDirection: Axis.horizontal,  // if want change vertical <--> horizontal
+                          scrollDirection: Axis.horizontal,
+                          physics: const AlwaysScrollableScrollPhysics(), // Smooth horizontal scrolling
                           itemCount: state.blogs.length,
                           itemBuilder: (context, index){
                             final blog = state.blogs[index];
-                            return BlogCard(blog: blog, color: AppPallete.gradient3);
+                            return BlogCard(blog: blog);
                           }),
                     ),
                   const SizedBox(height: 10,),
-                  Text("  Trending TechCrunches", style: TextStyle(fontWeight: FontWeight.bold,
-                    fontSize: 20,),),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: AppPallete.accentColor,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Trending TechCrunch',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: AppPallete.whiteColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 10,),
                   Container(
-                    // height: 200, // important! ListView needs height inside Column
+                    height: 400, // Fixed height for better scrolling
                     child: ListView.builder(
-                      shrinkWrap: true,
+                      physics: const AlwaysScrollableScrollPhysics(), // Ensure smooth scrolling
                       itemCount: news.length,
                       itemBuilder: (context, index) {
                         final newsItem = NewsEssential(
@@ -114,7 +170,6 @@ class _BlogPageState extends State<BlogPage> {
                           publishedAt: news[index].publishedAt,
                         );
                         return TrendNewsCard(
-                          color: AppPallete.gradient1,
                           news: newsItem,
                         );
                       },
