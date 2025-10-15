@@ -94,7 +94,9 @@ lib/
 
 ## 📱 Screenshots
 
-*(Add app screenshots here when available)*
+<img width="1920" height="1080" alt="devapp" src="https://github.com/user-attachments/assets/9b1137e0-86a7-4451-b9a7-31ae388cde6b" />
+<img width="1920" height="1080" alt="Tech news and Job alerts (1)" src="https://github.com/user-attachments/assets/9fa1761b-8212-4b9c-abd2-394eb6503d72" />
+
 
 ---
 
