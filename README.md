@@ -118,8 +118,8 @@ If you have suggestions or find any issues, feel free to open an **Issue** or su
 ## 🧑‍💻 Author
 
 **Harsh Mule**
-📧 [[your.email@example.com](mailto:your.email@example.com)]
-🌐 [LinkedIn Profile or Portfolio link]
+📧 [[your.email@example.com](mailto:code.harsh26@gmail.com)]
+🌐 [[LinkedIn Profile or Portfolio link](https://codeharsh27-0213cd.webflow.io/)]
 
 ---
 
