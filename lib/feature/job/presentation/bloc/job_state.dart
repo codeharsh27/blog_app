@@ -1,21 +1,19 @@
-import 'package:equatable/equatable.dart';
-import '../../data/model/job_model.dart';
+part of 'job_bloc.dart';
 
-abstract class JobState extends Equatable {
-  @override List<Object?> get props => [];
+@immutable
+sealed class JobState {}
+
+final class JobInitial extends JobState {}
+
+final class JobLoading extends JobState {}
+
+final class JobFailure extends JobState {
+  final String error;
+  JobFailure(this.error);
 }
 
-class JobInitial extends JobState {}
-class JobLoading extends JobState {}
-class JobLoaded extends JobState {
-  final List<JobModel> jobs;
-  final bool hasMore;
-  final int page;
-  JobLoaded({required this.jobs, required this.hasMore, required this.page});
-  @override List<Object?> get props => [jobs, hasMore, page];
-}
-class JobError extends JobState {
-  final String message;
-  JobError(this.message);
-  @override List<Object?> get props => [message];
+final class JobDisplaySuccess extends JobState {
+  final List<Job> jobs;
+  final String selectedFilter;
+  JobDisplaySuccess(this.jobs, {this.selectedFilter = 'Popular'});
 }

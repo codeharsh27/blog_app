@@ -1,10 +1,10 @@
 import 'package:blog_app/core/error/failure.dart';
 import 'package:blog_app/core/usecase/usecase.dart';
 import 'package:blog_app/feature/auth/domain/repository/auth_repository.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import '../../../../core/common/entity/user.dart';
 
-class CurrentUser implements Usecase<User, NoParams>{
+class CurrentUser implements Usecase<User, NoParams> {
   final AuthRepository authRepository;
   const CurrentUser(this.authRepository);
   @override

@@ -14,8 +14,12 @@ abstract interface class AuthSupabaseSource {
     required String email,
     required String password,
   });
-  
+
   Future<UserModel?> getCurrentUserData();
+
+  Future<UserModel> signInWithGoogle();
+  Future<UserModel> signInWithGithub();
+  Future<UserModel> signInWithFacebook();
 }
 
 class AuthSupabaseSourceImpl implements AuthSupabaseSource {
@@ -26,21 +30,49 @@ class AuthSupabaseSourceImpl implements AuthSupabaseSource {
   Session? get currentUserSession => supabaseClient.auth.currentSession;
 
   @override
-  Future<UserModel?> getCurrentUserData() async{
-    try{
-      if(currentUserSession!=null){
-        final userData = await supabaseClient.from('profiles').select().eq(
-          'id',
-          currentUserSession!.user.id,
+  Future<UserModel?> getCurrentUserData() async {
+    try {
+      if (currentUserSession != null) {
+        final userData = await supabaseClient
+            .from('profiles')
+            .select()
+            .eq('id', currentUserSession!.user.id);
+
+        final sessionUser = currentUserSession!.user;
+        final sessionName = sessionUser.userMetadata?['name'];
+        final sessionEmail = sessionUser.email;
+
+        if (userData.isNotEmpty) {
+          final profileData = Map<String, dynamic>.from(userData.first);
+          // Fallback to session name if profile name is missing
+          if (profileData['name'] == null ||
+              profileData['name'].toString().isEmpty) {
+            if (sessionName != null) {
+              profileData['name'] = sessionName;
+            }
+          }
+          // Ensure email is present
+          if (profileData['email'] == null ||
+              profileData['email'].toString().isEmpty) {
+            profileData['email'] = sessionEmail;
+          }
+          return UserModel.fromJson(profileData);
+        }
+
+        // If no profile data found, construct from session
+        return UserModel(
+          id: sessionUser.id,
+          email: sessionEmail ?? '',
+          name: sessionName ?? '',
+          skills: [],
         );
-        return UserModel.fromJson(userData.first);
       }
       return null;
-    }catch(e){
+    } catch (e) {
       throw ServerException(e.toString());
     }
   }
-  
+
   @override
   Future<UserModel> signInWithEmailPassword({
     required String email,
@@ -55,6 +87,8 @@ class AuthSupabaseSourceImpl implements AuthSupabaseSource {
         throw ServerException("User cannot be null!");
       }
       return UserModel.fromJson(response.user!.toJson());
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -76,9 +110,49 @@ class AuthSupabaseSourceImpl implements AuthSupabaseSource {
         throw ServerException("User cannot be null!");
       }
       return UserModel.fromJson(response.user!.toJson());
+    } on AuthException catch (e) {
+      if (e.message.contains('User already registered')) {
+        throw ServerException('User is already exist');
+      }
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
+  @override
+  Future<UserModel> signInWithGoogle() async {
+    return _signInWithProvider(OAuthProvider.google);
+  }
+
+  @override
+  Future<UserModel> signInWithGithub() async {
+    return _signInWithProvider(OAuthProvider.github);
+  }
+
+  @override
+  Future<UserModel> signInWithFacebook() async {
+    return _signInWithProvider(OAuthProvider.facebook);
+  }
+
+  Future<UserModel> _signInWithProvider(OAuthProvider provider) async {
+    try {
+      final bool isSuccess = await supabaseClient.auth.signInWithOAuth(
+        provider,
+        redirectTo: 'io.supabase.flutterquickstart://login-callback/',
+      );
+
+      if (!isSuccess) {
+        throw ServerException("Social login failed!");
+      }
+
+      return UserModel(
+        id: 'pending',
+        email: 'pending@social.login',
+        name: 'Pending',
+      );
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
 }

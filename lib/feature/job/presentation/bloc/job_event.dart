@@ -1,15 +1,21 @@
-import 'package:equatable/equatable.dart';
+part of 'job_bloc.dart';
 
-abstract class JobEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
+@immutable
+sealed class JobEvent {}
+
+final class JobFetchAllJobs extends JobEvent {}
+
+final class JobFilterSelect extends JobEvent {
+  final String filter;
+  JobFilterSelect(this.filter);
 }
 
-class FetchJobs extends JobEvent {
-  final bool refresh;
-  final String? query;
-  FetchJobs({this.refresh = false, this.query});
-  @override List<Object?> get props => [refresh, query];
+final class JobToggleSave extends JobEvent {
+  final Job job;
+  JobToggleSave(this.job);
 }
 
-class FetchMoreJobs extends JobEvent {}
+final class JobSearch extends JobEvent {
+  final String query;
+  JobSearch(this.query);
+}

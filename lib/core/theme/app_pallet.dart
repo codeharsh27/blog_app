@@ -19,6 +19,8 @@ class AppPallete {
   static const Color whiteColor = Color(0xFFF8F8F8);
   static const Color greyColor = Color(0xFF8E8E8E);
   static const Color transparentColor = Colors.transparent;
+  static const Color purpleColor = Color(0xFF6B4EFF);
+  static const Color lightPurpleColor = Color(0xFFE0D9FF);
 
   // Gradients for cards and backgrounds
   static const LinearGradient primaryGradient = LinearGradient(

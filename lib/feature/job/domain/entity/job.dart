@@ -1,28 +1,27 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../../../../core/secrets/job_secrets.dart';
-import '../../data/model/job_model.dart';
+class Job {
+  final String title;
+  final String company;
+  final String location;
+  final String employmentType;
+  final String applyUrl;
+  final DateTime? postedAt;
+  final String description;
+  final List<String> skills;
+  final double? matchScore;
+  final String? companyLogo;
+  final bool isSaved;
 
-class Jobs {
-  List<JobModel> jobs = [];
-
-  Future<void> getJobs() async {
-    final url = Uri.parse(
-        'https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${JobSecrets.appId}&app_key=${JobSecrets.apiKey}'
-    );
-
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-
-      if (jsonData['results'] != null) {
-        jobs = (jsonData['results'] as List)
-            .map((job) => JobModel.fromJson(job))
-            .toList();
-      }
-    } else {
-      throw Exception("Failed to load jobs. Status: ${response.statusCode}");
-    }
-  }
+  Job({
+    required this.title,
+    required this.company,
+    required this.location,
+    required this.employmentType,
+    required this.applyUrl,
+    required this.postedAt,
+    required this.description,
+    required this.skills,
+    this.matchScore,
+    this.companyLogo,
+    this.isSaved = false,
+  });
 }

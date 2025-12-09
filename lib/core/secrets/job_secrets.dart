@@ -1,4 +1,5 @@
 class JobSecrets {
-  static const String appId = "9e2ac4fb";
-  static const String apiKey = "bb4fb0a58ee7650b02ac84fade352a00";
+  static const String rapidApiKey =
+      "7ada23e3edmshee31cfdf142fbe3p16f546jsn8e3953db27a5";
+  static const String rapidApiHost = "jsearch.p.rapidapi.com";
 }

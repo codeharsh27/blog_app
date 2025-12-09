@@ -1,11 +1,13 @@
-class User{
+class User {
   final String id;
-  final String name;
   final String email;
+  final String name;
+  final List<String> skills;
 
   User({
     required this.id,
+    required this.email,
     required this.name,
-    required this.email});
-
+    this.skills = const [],
+  });
 }

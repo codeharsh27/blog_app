@@ -71,10 +71,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
       appBar: AppBar(
         title: const Text("Upload Blog"),
         actions: [
-          IconButton(
-            onPressed: uploadBlog,
-            icon: const Icon(Icons.check),
-          ),
+          IconButton(onPressed: uploadBlog, icon: const Icon(Icons.check)),
         ],
       ),
       body: BlocConsumer<BlogBloc, BlogState>(
@@ -82,10 +79,12 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
           if (state is BlogFailure) {
             showSnackBar(context, state.error);
           } else if (state is BlogUploadSuccess) {
+            // Fetch the latest blogs before navigating back
+            context.read<BlogBloc>().add(BlogFetchAllBlogs());
             Navigator.pushAndRemoveUntil(
               context,
               BlogPage.route(),
-                  (route) => false,
+              (route) => false,
             );
           }
         },
@@ -103,72 +102,78 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                   children: [
                     image != null
                         ? GestureDetector(
-                      onTap: selectImage,
-                      child: SizedBox(
-                        height: 150,
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.file(image!, fit: BoxFit.cover),
-                        ),
-                      ),
-                    )
-                        : GestureDetector(
-                      onTap: selectImage,
-                      child: CustomPaint(
-                        painter: DashedBorderPainter(),
-                        child: Container(
-                          height: 150,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.folder_open),
-                              SizedBox(height: 15),
-                              Text(
-                                "Select your image",
-                                style: TextStyle(fontSize: 15),
+                            onTap: selectImage,
+                            child: SizedBox(
+                              height: 150,
+                              width: double.infinity,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.file(image!, fit: BoxFit.cover),
                               ),
-                            ],
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: selectImage,
+                            child: CustomPaint(
+                              painter: DashedBorderPainter(),
+                              child: Container(
+                                height: 150,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.folder_open),
+                                    SizedBox(height: 15),
+                                    Text(
+                                      "Select your image",
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 20),
 
                     // Topic Selection
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: [
-                          'Technology',
-                          'Business',
-                          'Programming',
-                          'AI',
-                        ].map((e)=>Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                if(selectedTopics.contains(e)){
-                                  selectedTopics.remove(e);
-                                }else{
-                                  selectedTopics.add(e);
-                                }
-                              });
-                            },
-                            child: Chip(label: Text(e),
-                              color: selectedTopics.contains(e)? const WidgetStatePropertyAll(AppPallete.gradient1): null,
-                              side: selectedTopics.contains(e)? null: BorderSide(
-                                color: AppPallete.borderColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                        ).toList(),
+                        children:
+                            ['Technology', 'Business', 'Programming', 'AI']
+                                .map(
+                                  (e) => Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (selectedTopics.contains(e)) {
+                                            selectedTopics.remove(e);
+                                          } else {
+                                            selectedTopics.add(e);
+                                          }
+                                        });
+                                      },
+                                      child: Chip(
+                                        label: Text(e),
+                                        color: selectedTopics.contains(e)
+                                            ? const WidgetStatePropertyAll(
+                                                AppPallete.gradient1,
+                                              )
+                                            : null,
+                                        side: selectedTopics.contains(e)
+                                            ? null
+                                            : BorderSide(
+                                                color: AppPallete.borderColor,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                       ),
                     ),
                     const SizedBox(height: 20),

@@ -1,13 +1,10 @@
 import 'package:blog_app/core/theme/app_pallet.dart';
 import 'package:flutter/material.dart';
 
-class AppTheme{
+class AppTheme {
   static _border([Color color = AppPallete.borderColor]) => OutlineInputBorder(
-  borderSide: BorderSide(
-  color: color,
-  width: 1.5,
-  ),
-  borderRadius: BorderRadius.circular(12)
+    borderSide: BorderSide(color: color, width: 1.5),
+    borderRadius: BorderRadius.circular(12),
   );
 
   static final darkThemeMode = ThemeData.dark().copyWith(
@@ -25,22 +22,16 @@ class AppTheme{
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),
-      bodyLarge: TextStyle(
-        color: AppPallete.textPrimary,
-        fontSize: 16,
-      ),
-      bodyMedium: TextStyle(
-        color: AppPallete.textSecondary,
-        fontSize: 14,
-      ),
+      bodyLarge: TextStyle(color: AppPallete.textPrimary, fontSize: 16),
+      bodyMedium: TextStyle(color: AppPallete.textSecondary, fontSize: 14),
     ),
     chipTheme: const ChipThemeData(
-    color: WidgetStatePropertyAll(AppPallete.surfaceColor),
-    side: BorderSide.none,
-    labelStyle: TextStyle(color: AppPallete.textPrimary),
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-  contentPadding: EdgeInsets.all(20),
+      color: WidgetStatePropertyAll(AppPallete.surfaceColor),
+      side: BorderSide.none,
+      labelStyle: TextStyle(color: AppPallete.textPrimary),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: EdgeInsets.all(20),
       border: _border(),
       enabledBorder: _border(),
       focusedBorder: _border(AppPallete.primaryColor),
@@ -53,22 +44,15 @@ class AppTheme{
         backgroundColor: AppPallete.primaryColor,
         foregroundColor: AppPallete.whiteColor,
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        textStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
     ),
     cardTheme: CardThemeData(
       color: AppPallete.cardBackground,
       elevation: 4,
-      shadowColor: AppPallete.primaryColor.withOpacity(0.3),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shadowColor: AppPallete.primaryColor.withAlpha(77),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppPallete.transparentColor,
@@ -78,9 +62,7 @@ class AppTheme{
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      iconTheme: IconThemeData(
-        color: AppPallete.textPrimary,
-      ),
+      iconTheme: IconThemeData(color: AppPallete.textPrimary),
     ),
   );
 }
