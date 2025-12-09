@@ -150,17 +150,9 @@ flutter run
 ---
 
 ## 📸 Screenshots
-<img width="1080" height="2424" alt="application_page" src="https://github.com/user-attachments/assets/c7dc1f69-5984-46e9-bc97-ec78af7d4424" />
-<img width="1080" height="2424" alt="app_logo" src="https://github.com/user-attachments/assets/6cae8a7a-e6a5-4b08-a11b-9416867cab9a" />
-<img width="1080" height="2424" alt="template_selection" src="https://github.com/user-attachments/assets/d92944bc-7d20-4a14-ab77-bbb3bc55872c" />
-<img width="1080" height="2424" alt="resume_built" src="https://github.com/user-attachments/assets/f0f4b1d0-b495-470f-94f8-59606da7f438" />
-<img width="1080" height="2424" alt="resume_builder_landing" src="https://github.com/user-attachments/assets/dd4c67d7-5339-445d-9475-f5495be14613" />
-<img width="1080" height="2424" alt="profile_page" src="https://github.com/user-attachments/assets/50c19816-83bd-48aa-828d-7f3c20d9fb22" />
-<img width="1080" height="2424" alt="profile_detail_section" src="https://github.com/user-attachments/assets/b62812b0-b760-4b6e-af0c-9a30ff09b45e" />
-<img width="1080" height="2424" alt="info_collection_for_resume" src="https://github.com/user-attachments/assets/7f4f16b0-c914-4044-8044-54634bd45a30" />
-<img width="1080" height="2424" alt="home_page" src="https://github.com/user-attachments/assets/9a8e7208-910a-4daa-9e36-8b421397411e" />
-<img width="1080" height="2424" alt="explore_page" src="https://github.com/user-attachments/assets/3efbbcae-4fcb-4a54-8ab7-a0cc63a67cbd" />
 
+<img width="2752" height="1536" alt="group_1" src="https://github.com/user-attachments/assets/cdea6f23-6912-4a8e-a6b1-966fef1a7b06" />
+<img width="2752" height="1536" alt="group_2" src="https://github.com/user-attachments/assets/e9962aa3-a019-4fc5-85fd-ac7cc2b41a8b" />
 
 ---
 
