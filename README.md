@@ -1,164 +1,142 @@
-# 🚀 DevApp — Your Personal Tech Growth & Career Companion
+# 🚀 DevApp
 
-DevApp is a powerful, all-in-one platform designed for developers, students, job seekers, and aspiring tech professionals. It helps users learn faster, grow smarter, and build their careers using AI-powered systems, personalized insights, and automation.
+**The AI-Powered Career Ecosystem for Developers**
 
-Built with scalability using Clean Architecture, SOLID Principles, Firebase, and Hive for offline-ready performance.
+DevApp bridges the gap between learning and getting hired. It is an intelligent, offline-first platform that automates job applications, identifies skill gaps, and provides personalized mentorship to accelerate developer career growth.
 
----
-
-## 🌟 Key Features
-
-### 📰 Tech News & Startup Insights (API-Free)
-
-* Latest tech news
-* Startup insights
-* Market trends
-* Developer-focused updates
-* Aggregated and summarized in real-time without paid APIs
-
-### 💼 Auto Job Apply System
-
-* Finds relevant jobs automatically
-* Fills repetitive application forms
-* Auto-applies to matching roles (Coming Soon)
-* Tracks applied jobs with a smart dashboard
-
-### 🧠 Skill Gap Analysis + Personalized Learning Path
-
-* Analyzes skills, resume, portfolio, and interests
-* Recommends skills to learn
-* Provides courses, roadmaps, and tasks
-* Sets realistic goals based on the user's level
-
-### ✍️ AI Resume & Portfolio Builder
-
-* ATS-optimized resume creation
-* Personalized portfolio website generation
-* AI-written project descriptions
-* Custom cover letters and LinkedIn posts
-
-### 🤖 AI Career Mentor
-
-* 24/7 assistant for technical doubts
-* Suggests projects and DSA practice
-* Helps with system design, app development, ML, etc.
-* Offers interview prep guidance
-
-### 💾 Offline Mode (Hive)
-
-* Save articles and read offline
-* Store drafts and notes
-* Continue tasks without connectivity
-
-### 🔐 Firebase Authentication
-
-* Secure login/signup
-* Google sign-in
-* Email/password login
-* Encrypted data storage
+Built with **Scalability**, **Clean Architecture**, and **Offline-First** principles at its core.
 
 ---
 
-## 🧩 Tech Stack
+## 📸 Interface
 
-| Category             | Technology Used                         |
-| -------------------- | --------------------------------------- |
-| **Frontend**         | Flutter                                 |
-| **Backend**          | Firebase (Firestore, Auth, Functions)   |
-| **Offline Storage**  | Hive                                    |
-| **AI Engine**        | Custom API + Local ML + LLM Integration |
-| **Architecture**     | Clean Architecture + SOLID              |
-| **State Management** | Riverpod / Provider                     |
-| **Deployment**       | Firebase Hosting + Android/iOS          |
+<p align="center">
+  <img width="45%" alt="Dashboard" src="https://github.com/user-attachments/assets/cdea6f23-6912-4a8e-a6b1-966fef1a7b06" />
+  <img width="45%" alt="Features" src="https://github.com/user-attachments/assets/e9962aa3-a019-4fc5-85fd-ac7cc2b41a8b" />
+</p>
 
 ---
 
-## 📂 Folder Structure
+## ⚡ Core Features
 
-```
+### 🧠 Intelligence & Growth
+- **Skill Gap Analysis**  
+  Scans your developer profile against real market demands and recommends realistic, personalized learning paths.
+  
+- **AI Career Mentor**  
+  A 24/7 assistant for technical queries, system design guidance, interview preparation, and career advice.
+
+- **Smart Learning**  
+  Curated courses, resources, and roadmaps tailored to your current skill level and career goals.
+
+---
+
+### 💼 Career Automation
+- **Auto-Apply System**  
+  Automatically finds relevant job opportunities, fills application forms, applies on your behalf, and tracks application status.
+
+- **AI Resume Builder**  
+  Instantly generates ATS-optimized resumes and developer portfolio websites.
+
+- **AI Cover Letter Generator**  
+  Creates custom, job-specific cover letters using AI for higher response rates.
+
+---
+
+### 🛠 Utility & Performance
+- **Tech Aggregator**  
+  Real-time startup insights and tech news using an API-free implementation.
+
+- **Offline-First Support (Hive)**  
+  Read articles, write notes, and track tasks even without an internet connection.
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+DevApp follows **Clean Architecture** and **SOLID principles**, ensuring separation of concerns, scalability, and testability.
+
+| Layer | Technology |
+|------|-----------|
+| **Language** | Dart |
+| **Framework** | Flutter |
+| **State Management** | Riverpod / Provider |
+| **Architecture** | Clean Architecture + SOLID |
+| **Backend** | Firebase (Auth, Firestore, Cloud Functions) |
+| **Local Storage** | Hive (NoSQL) |
+| **AI Engine** | Custom API + Local ML Integration |
+
+---
+
+## 📂 Project Structure
+
+```bash
 lib/
-│
-├── main.dart
-├── core/                  # Constants, themes, utilities
-├── data/                  # Models, repositories, services
-│   ├── models/
-│   ├── repositories/
-│   ├── services/
-│       ├── firebase_service.dart
-│       ├── hive_service.dart
-│
-├── domain/                # Entities, use-cases
-│
-├── presentation/          # Screens, widgets, UI logic
-│   ├── screens/
-│   │   ├── home_screen.dart
-│   │   ├── job_apply_screen.dart
-│   │   ├── news_screen.dart
-│   │   ├── learning_path_screen.dart
-│   │   ├── ai_assistant_screen.dart
-│   │   ├── skill_recommendation_screen.dart
-│   │   ├── login_screen.dart
-│
-├── providers/             # Riverpod/Provider states
-└── utils/                 # Helpers, extensions
-```
+├── core/                  # Global utilities, themes, constants
+├── data/                  # Data layer (API calls, Hive, Models)
+│   ├── repositories/      # Repository implementations
+│   └── services/          # External services (Firebase, HTTP)
+├── domain/                # Business logic (Entities, Use Cases)
+├── presentation/          # UI Layer (Screens, Widgets, State Management)
+└── utils/                 # Extensions and helper functions
+````
 
 ---
 
-## ⚙️ Installation
+## 🚀 Getting Started
 
-### 1. Clone the Repository
+### Prerequisites
 
-```bash
-git clone https://github.com/yourusername/devapp.git
-```
-
-### 2. Navigate into the Project
-
-```bash
-cd devapp
-```
-
-### 3. Install Dependencies
-
-```bash
-flutter pub get
-```
-
-### 4. Setup Firebase
-
-* Create a Firebase project
-* Enable Authentication & Firestore
-* Add `google-services.json` to `android/app/`
-* Add `GoogleService-Info.plist` to `ios/Runner/`
-
-### 5. Run the App
-
-```bash
-flutter run
-```
+* Flutter SDK
+* Firebase Project
 
 ---
 
-## 🛡️ Security
+### Installation
 
-* Firebase Authentication ensures secure user login
-* Firestore rules protect user data
-* Hive storage is encrypted locally
-* Sensitive data is never stored in plain text
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/codeharsh27/devapp.git
+   cd devapp
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   flutter pub get
+   ```
+
+3. **Firebase Configuration**
+
+   * Add `google-services.json` to `android/app/`
+   * Add `GoogleService-Info.plist` to `ios/Runner/`
+
+4. **Run the application**
+
+   ```bash
+   flutter run
+   ```
 
 ---
 
-## 📸 Screenshots
+## 🛡️ Security & Privacy
 
-<img width="2752" height="1536" alt="group_1" src="https://github.com/user-attachments/assets/cdea6f23-6912-4a8e-a6b1-966fef1a7b06" />
-<img width="2752" height="1536" alt="group_2" src="https://github.com/user-attachments/assets/e9962aa3-a019-4fc5-85fd-ac7cc2b41a8b" />
+* **Authentication**
+  Secure Google and Email login using Firebase Authentication.
+
+* **Data Privacy**
+  Firestore security rules are enforced. Sensitive data is never stored in plain text.
+
+* **Local Encryption**
+  Hive boxes are encrypted to ensure offline data security.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to open an Issue or submit a Pull Request.
+Contributions are welcome!
+Please fork the repository and submit a Pull Request with clear descriptions of your changes.
 
 ---
 
@@ -166,10 +144,8 @@ Contributions are welcome! Feel free to open an Issue or submit a Pull Request.
 
 **Harsh Mule**
 📧 Email: [code.harsh26@gmail.com](mailto:code.harsh26@gmail.com)
-🌐 Portfolio: [https://codeharsh27-0213cd.webflow.io/](https://codeharsh27-0213cd.webflow.io/)
 
 ---
 
-## 📄 License
+⭐ If you like this project, consider giving it a star!
 
-This project is licensed under the MIT License.
